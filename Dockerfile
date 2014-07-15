@@ -17,10 +17,14 @@ RUN groupadd -r service -g 11235 && useradd -u 54322 -r -g service -d /opt/wildf
 
 RUN chown -R wildfly:service /opt/wildfly/*
 
+USER wildfly
+
 RUN /opt/wildfly/bin/add-user.sh deploy D3ploy --silent
 
+# Moved up to get past bug
 EXPOSE 8080 9990
 
-USER wildfly
+# Moved up to get past bug
+#USER wildfly
 
 CMD ["/opt/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
