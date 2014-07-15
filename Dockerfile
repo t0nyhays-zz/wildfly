@@ -15,11 +15,13 @@ RUN ln -s /opt/wildfly-8.1.0.Final /opt/wildfly
 # Create the wildfly user and group
 RUN groupadd -r service -g 11235 && useradd -u 54322 -r -g service -d /opt/wildfly -s /sbin/nologin -c "WildFly user" wildfly
 
-RUN chown -R wildfly:service /opt/wildfly/*
+#RUN chown -R wildfly:service /opt/wildfly/*
 
 USER wildfly
 
 RUN /opt/wildfly/bin/add-user.sh deploy D3ploy --silent
+
+RUN chown -R wildfly:service /opt/wildfly/*
 
 # Moved up to get past bug
 EXPOSE 8080 9990
