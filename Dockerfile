@@ -15,6 +15,10 @@ RUN ln -s /opt/wildfly-8.1.0.Final /opt/wildfly
 # Create the wildfly user and group
 RUN groupadd -r service -g 11235 && useradd -u 54322 -r -g service -d /opt/wildfly -s /sbin/nologin -c "WildFly user" wildfly
 
+RUN mkdir -p /opt/wildfly/modules/system/layers/base/com/oracle/ojdbc6/main
+
+RUN cd /tmp && curl -o ojdbc.jar "http://nexus.ci.neoninternal.org:8081/nexus/service/local/artifact/maven/redirect?g=com.oracle&a=ojdbc6&v=11.2.0.3&r=thirdparty&p=jar&"
+
 RUN /opt/wildfly/bin/add-user.sh deploy D3ploy --silent
 
 RUN chown -R wildfly:service /opt/wildfly/*
