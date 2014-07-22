@@ -1,5 +1,5 @@
 # Use latest Centos w/ Java image from Tony
-FROM t0nyhays/jdk7:v2
+FROM t0nyhays/jdk7:v3
 
 RUN yum install -y tar
 
